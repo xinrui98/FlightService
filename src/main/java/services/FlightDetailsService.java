@@ -4,16 +4,17 @@ import data.Flight;
 import org.json.JSONObject;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class FlightDetailsService {
+public class FlightDetailsService extends AbstractService {
     private List<Flight> allFlights;
+    private Map<Long, Flight> allFlightsMap;
     private JSONObject jsonRequest;
 
     public FlightDetailsService(List<Flight> allFlights, JSONObject jsonRequest) {
-        this.allFlights = allFlights;
-        this.jsonRequest = jsonRequest;
+        super(allFlights, jsonRequest);
     }
 
     public JSONObject getFlightDetails() {
@@ -28,9 +29,7 @@ public class FlightDetailsService {
         JSONObject json = new JSONObject();
 
         if (!flight.isPresent()) {
-            json.put("code", "FAILURE");
-            json.put("message", "No flight found");
-            return json;
+            return this.createErrorJSONObject("No flight found");
         } else {
             json.put("code", "SUCCESS");
             JSONObject flightJson = new JSONObject();
