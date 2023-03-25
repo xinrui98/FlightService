@@ -1,5 +1,6 @@
 package services;
 
+import data.DateTimeString;
 import data.Flight;
 import data.UserMonitoring;
 import org.json.JSONObject;
@@ -7,11 +8,6 @@ import org.json.JSONObject;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
-import data.DateTimeString;
 
 public class MonitorUpdatesService extends AbstractService {
     private List<Flight> allFlights;

@@ -6,7 +6,6 @@ import org.json.JSONObject;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class FlightDetailsService extends AbstractService {
     private List<Flight> allFlights;

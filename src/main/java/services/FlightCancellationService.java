@@ -6,17 +6,17 @@ import org.json.JSONObject;
 import java.util.List;
 import java.util.Map;
 
-public class FlightReservationService extends AbstractService {
+public class FlightCancellationService extends AbstractService {
 
     private List<Flight> allFlights;
     private Map<Long, Flight> allFlightsMap;
     private JSONObject jsonRequest;
 
-    public FlightReservationService(List<Flight> allFlights, JSONObject jsonRequest) {
+    public FlightCancellationService(List<Flight> allFlights, JSONObject jsonRequest) {
         super(allFlights, jsonRequest);
     }
 
-    public JSONObject reserveFlight() {
+    public JSONObject cancelFlight() {
         JSONObject data = jsonRequest.getJSONObject("data");
         String user_id = jsonRequest.getString("userid");
         Long f_id = Long.valueOf(data.getString("flightid"));
@@ -24,9 +24,9 @@ public class FlightReservationService extends AbstractService {
 
         Flight flight = allFlightsMap.get(f_id);
         if (flight != null) {
-            int seatsAvail = flight.reserveSeats(user_id, numSeats);
+            int seatsAvail = flight.cancelSeats(user_id, numSeats);
             if (seatsAvail == -1) {
-                return this.createErrorJSONObject("You're trying to reserve too many seats");
+                return this.createErrorJSONObject("You're trying to cancel too many seats");
             }
             JSONObject json = new JSONObject();
             json.put("code", "SUCCESS");
